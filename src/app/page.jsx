@@ -109,7 +109,7 @@ export default function page() {
             <p className="font-bold">Pertanyaan:</p>
             <p>{chat.question}</p>
             <p className="font-bold mt-2">Balasan:</p>
-            <p className="whitespace-break-spaces">{chat.reply}</p>
+            <pre className="whitespace-break-spaces">{chat.reply}</pre>
             <div>
               <Button onClick={() => handleCopy(index)}>
                 <ClipboardCopyIcon />
