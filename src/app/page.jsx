@@ -103,7 +103,7 @@ export default function page() {
         {storedMessage.map((chat, index) => (
           <div
             key={index}
-            className="border p-4 rounded-lg flex flex-col gap-3"
+            className="border p-4 rounded-lg flex flex-col gap-3 w-full  overflow-x-auto"
           >
             <p className="font-bold">Pertanyaan:</p>
             <p>{chat.question}</p>
