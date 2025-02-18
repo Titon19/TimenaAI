@@ -94,7 +94,7 @@ export default function page() {
 
   return (
     <>
-      <div className="p-10 pt-24 mb-64 md:mb-36 flex flex-col gap-3 overflow-x-auto w-full">
+      <div className="p-10 pt-24 mb-64 md:mb-36 flex flex-col gap-3 w-full">
         {reply && (
           <div className="border p-4 rounded-lg">
             <p className="font-bold">{reply}</p>
