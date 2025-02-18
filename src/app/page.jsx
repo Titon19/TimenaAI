@@ -2,8 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { useEffect, useState } from "react";
-import { ClipboardCopy, ClipboardCopyIcon, Loader2 } from "lucide-react";
-import { CopyToClipboard } from "react-copy-to-clipboard";
+import { ClipboardCopyIcon, Loader2 } from "lucide-react";
 
 export default function page() {
   const [message, setMessage] = useState("");
@@ -109,7 +108,7 @@ export default function page() {
             <p className="font-bold">Pertanyaan:</p>
             <p>{chat.question}</p>
             <p className="font-bold mt-2">Balasan:</p>
-            <pre className="whitespace-break-spaces">{chat.reply}</pre>
+            <p className="whitespace-break-spaces">{chat.reply}</p>
             <div>
               <Button onClick={() => handleCopy(index)}>
                 <ClipboardCopyIcon />
