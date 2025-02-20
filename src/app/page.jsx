@@ -4,7 +4,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { useEffect, useState } from "react";
 import { ClipboardCopyIcon, Loader2 } from "lucide-react";
 
-export default function page() {
+export default function Page() {
   const [message, setMessage] = useState("");
   const [reply] = useState("Bagaimana saya membantu anda hari ini😊");
   const [thingkingLoad, setThinkingLoad] = useState(false);
@@ -43,11 +43,19 @@ export default function page() {
       return;
     }
 
+    const newMessageHistory = [
+      ...storedMessage,
+      { question: message, reply: "" },
+    ];
+
+    setStoreMessage(newMessageHistory);
+    localStorage.setItem("message", JSON.stringify(newMessageHistory));
+
     try {
       const response = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message, history: storedMessage }),
+        body: JSON.stringify({ message, history: newMessageHistory }),
       });
 
       if (!response.ok) {
@@ -56,15 +64,15 @@ export default function page() {
 
       const data = await response.json();
 
-      const newChatMessage = [
-        ...storedMessage,
-        { question: message, reply: data.reply },
-      ];
+      const updateHistoryMessage = newMessageHistory.map((chat, index) => {
+        return index === newMessageHistory.length - 1
+          ? { ...chat, reply: data.reply }
+          : chat;
+      });
 
       setMessage("");
-      localStorage.setItem("message", JSON.stringify(newChatMessage));
-
-      setStoreMessage(newChatMessage);
+      setStoreMessage(updateHistoryMessage);
+      localStorage.setItem("message", JSON.stringify(updateHistoryMessage));
     } catch (error) {
       console.error(error);
       setFailed(error.message);
